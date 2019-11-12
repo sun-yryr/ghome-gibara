@@ -25,17 +25,22 @@ Browser.defaultResolverSequence = [
 ];
 ```
 
-## google-tts-api
+## Add Voices
 
-Update to the latest version.
+Please prepare mp3 file as `hoge.mp3`
 
-Modify the following file `node_modules/google-home-notifier/package.json`
+1. Put `hoge.mp3` in the `/audio` directory
+1. Add the following code to the next file `/server.js`
 
-Find this line: `"google-tts-api": "https://github.com/darrencruse/google-tts/tarball/british-voice",`
+```js
+// 第一引数には / から始まるパスを指定する
+app.get('/', (req, res) => {
+    const fileName = 'gomikasu.mp3'  // 1で追加したmp3ファイル名
+    const mp3URL = `${hostURL}:${port}/audio/${fileName}`;
+    const msg = 'Say "OK Google, Stop" to stop play music.';
 
-And change to: `"google-tts-api": "latest",`
-
-```shell
-cd node_modules/google-home-notifier
-npm update google-tts-api
+    home.device(homeDeviceName, lang);
+    home.play(mp3URL, () => console.log(msg));
+    res.send('ok');
+});
 ```

@@ -1,8 +1,13 @@
 const fs = require('fs');
 const path = require('path');
 const app = require('express')();
-const port = 3000;
 const home = require('google-home-notifier');
+/* user config */
+const hostURL = "http://192.168.10.41"
+const port = 3000;
+const homeDeviceName = "Google-Home-Mini-da65fcc536a9da79539c09325b43bd74";
+const lang = "ja";
+/* ----------- */
 
 app.listen(port, console.log('port: ' + port));
 app.get('/audio/:file', (req, res) => {
@@ -20,10 +25,11 @@ app.get('/audio/:file', (req, res) => {
 });
 
 app.get('/', (req, res) => {
-    const mp3URL = 'http://192.168.10.41:3000/audio/gomikasu.mp3';
+    const fileName = 'gomikasu.mp3'
+    const mp3URL = `${hostURL}:${port}/audio/${fileName}`;
     const msg = 'Say "OK Google, Stop" to stop play music.';
 
-    home.device("Google-Home-Mini-da65fcc536a9da79539c09325b43bd74", 'ja'); // 研究室
+    home.device(homeDeviceName, lang);
     home.play(mp3URL, () => console.log(msg));
     res.send('ok');
 });
