@@ -4,7 +4,7 @@ const app = require('express')();
 const home = require('google-home-notifier');
 /* user config */
 const hostURL = "http://192.168.10.41"
-const port = 3000;
+const port = 2434;
 const homeDeviceName = "Google-Home-Mini-da65fcc536a9da79539c09325b43bd74";
 const lang = "ja";
 /* ----------- */
