@@ -24,8 +24,18 @@ app.get('/audio/:file', (req, res) => {
     });
 });
 
-app.get('/', (req, res) => {
+app.get('/gmks', (req, res) => {
     const fileName = 'gomikasu.mp3'
+    const mp3URL = `${hostURL}:${port}/audio/${fileName}`;
+    const msg = 'Say "OK Google, Stop" to stop play music.';
+
+    home.device(homeDeviceName, lang);
+    home.play(mp3URL, () => console.log(msg));
+    res.send('ok');
+});
+
+app.get('/warenijisanjizo', (req, res) => {
+    const fileName = 'warenijisanjizo.mp3'
     const mp3URL = `${hostURL}:${port}/audio/${fileName}`;
     const msg = 'Say "OK Google, Stop" to stop play music.';
 
